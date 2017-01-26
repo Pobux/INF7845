@@ -17,6 +17,7 @@ public final class Hybride extends VaisseauArmeLourd
             this.soute = soute;
         }
     }
+    
     @Override
     public void charger(Transportable element) {
         if(soute.peutCharger(element)) {

@@ -14,6 +14,7 @@ public final class Transport extends Vaisseau implements Chargeable {
                 && soute.getCapaciteMasse() < masse ) {
             this.soute = soute;
         }
+        //TODO gestion d'erreur
     }
     
     @Override
@@ -21,5 +22,6 @@ public final class Transport extends Vaisseau implements Chargeable {
         if(soute.peutCharger(element)) {
             soute.charger(element);
         }
+        //TODO gestion d'erreur
     }
 }
