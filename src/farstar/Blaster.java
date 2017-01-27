@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package farstar;
 
-/**
- *
- * @author pobe
- */
 public class Blaster extends Arme {
+    int capaciteGaz;
     
-    public Blaster(String nom, int masse, int volume) {
+    public Blaster(String nom, int masse, int volume, int capaciteGaz) {
         super(nom, masse, volume);
+        this.capaciteGaz = capaciteGaz;
     }
     
     public void fire() {

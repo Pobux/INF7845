@@ -1,5 +1,4 @@
 package farstar;
-import java.util.*;
 
 public abstract class VaisseauArme extends Vaisseau {
     protected int capaciteMaximale;

@@ -9,10 +9,20 @@ public class VaisseauArmeLeger extends VaisseauArme {
         super(nom, masse, volume, capaciteMaximale);
     }
     
-    public void desequiper(Arme arme) {
-        if(elementCharges.containsKey(arme.getNom())) {
-            elementCharges.remove(arme.getNom());
+    public void desequiper(String nomArme) {
+        if(elementCharges.containsKey(nomArme)) {
+            elementCharges.remove(nomArme);
         }
         //TODO gestion des erreurs
+    }
+    
+    public int getMasse() {
+        int masseTotale = masse;
+        for (Map.Entry<String, Phaser> e : elementCharges.entrySet()) {
+            Phaser value = e.getValue();
+            masseTotale += value.getMasse();
+        }
+        
+        return masseTotale;
     }
 }

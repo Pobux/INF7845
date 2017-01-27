@@ -15,9 +15,7 @@ public abstract class Transportable {
         return nom;
     }
     
-    public int getMasse() {
-        return masse;
-    }
+    abstract public int getMasse();
     
     public int getVolume() {
         return volume;
