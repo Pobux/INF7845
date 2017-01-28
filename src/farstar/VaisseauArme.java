@@ -1,15 +1,44 @@
 package farstar;
 
-public abstract class VaisseauArme extends Vaisseau {
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class VaisseauArme extends Transportable implements Vaisseau {
     protected int capaciteMaximale;
-            
-    public VaisseauArme(String nom, int masse, int volume, int capaciteMaximale) {
-        super(nom, masse, volume);
-        this.capaciteMaximale = capaciteMaximale;
+    Map<String, Arme> elementCharges = new HashMap();
+    
+    public VaisseauArme(TypeProduit type, Object[] args) {
+        super(type, args); //Même les classes abstraites doivent avoir un constructeur
     }
     
-    abstract void desequiper(String arme);
+    public void equiper(Arme arme) {
+        if(!elementCharges.containsKey(arme.getNom()) 
+                && compterEquipement() < capaciteMaximale ) {
+            elementCharges.put(arme.getNom(), arme);
+        }
+        //TODO gestion des erreurs
+    }
+        
+    public void desequiper(String armeNom) {
+        if(elementCharges.containsKey(armeNom)) {
+            elementCharges.remove(armeNom);
+        }
+        //TODO gestion des erreurs
+    }
     
-    abstract int compterEquipement();
+
+    public int compterEquipement() {
+        return elementCharges.size();
+    }
+    
+    public int getMasse() {
+        int masseTotale = masse;
+        for (Map.Entry<String, Arme> e : elementCharges.entrySet()) {
+            Arme value = e.getValue();
+            masseTotale += value.getMasse();
+        }
+        
+        return masseTotale;
+    }
 }
  

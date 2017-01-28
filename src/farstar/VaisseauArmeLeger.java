@@ -5,8 +5,18 @@ import java.util.Map;
 
 public class VaisseauArmeLeger extends VaisseauArme {
     Map<String, Phaser> elementCharges = new HashMap();
-    public VaisseauArmeLeger(String nom, int masse, int volume, int capaciteMaximale) {
-        super(nom, masse, volume, capaciteMaximale);
+    
+    public VaisseauArmeLeger(TypeProduit type, Object[] args) {
+        super(TypeProduit.ARMELEGER, args);
+        construire(args);
+    }
+    
+    public void construire(Object[] args) {
+        
+    };
+    
+    public void localiser(Transportable element) {
+        
     }
     
     public void equiper(Phaser arme) {
