@@ -7,5 +7,9 @@ public abstract class VaisseauArme extends Vaisseau {
         super(nom, masse, volume);
         this.capaciteMaximale = capaciteMaximale;
     }
+    
+    abstract void desequiper(String arme);
+    
+    abstract int compterEquipement();
 }
  

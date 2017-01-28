@@ -9,13 +9,28 @@ public class VaisseauArmeLourd extends VaisseauArme {
         super(nom, masse, volume, capaciteMaximale);
     }
     
-    public void desequiper(Arme arme) {
-        if(elementCharges.containsKey(arme.getNom())) {
-            elementCharges.remove(arme.getNom());
+    public void equiper(Phaser arme) {
+        if(!elementCharges.containsKey(arme.getNom()) 
+                && compterEquipement() < capaciteMaximale ) {
+            elementCharges.put(arme.getNom(), arme);
+        }
+        //TODO gestion des erreurs
+    }
+        
+    @Override
+    public void desequiper(String armeNom) {
+        if(elementCharges.containsKey(armeNom)) {
+            elementCharges.remove(armeNom);
         }
         //TODO gestion des erreurs
     }
     
+    @Override
+    public int compterEquipement() {
+        return elementCharges.size();
+    }
+    
+    @Override
     public int getMasse() {
         int masseTotale = masse;
         for (Map.Entry<String, Arme> e : elementCharges.entrySet()) {

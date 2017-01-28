@@ -20,11 +20,7 @@ public final class Transport extends Vaisseau implements Chargeable {
     
     @Override
     public void setSoute(Soute soute) {
-        if(soute.getCapaciteVolume() <= volume 
-                && soute.getCapaciteMasse() <= masse ) {
-            this.soute = soute;
-        }
-        //TODO gestion d'erreur
+        this.soute = soute;
     }
     
     @Override

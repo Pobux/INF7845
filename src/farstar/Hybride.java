@@ -12,10 +12,7 @@ public final class Hybride extends VaisseauArmeLourd
     
     @Override
     public void setSoute(Soute soute) {
-        if(soute.getCapaciteVolume() < volume 
-                && soute.getCapaciteMasse() < masse ) {
-            this.soute = soute;
-        }
+        this.soute = soute;
     }
     
     @Override
