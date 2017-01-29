@@ -22,7 +22,7 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
     };
     
     public void creerSoute(int volumeSoute, int masseSoute) {
-        soute = new Soute(volumeSoute, masseSoute);
+        soute = new Soute(volumeSoute, masseSoute, this);
     }
     
     @Override
@@ -32,22 +32,28 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
     
     @Override
     public int getVolume() {
-        return volume + soute.getVolumeCourant();
+        return volume + soute.getCapaciteVolume();
+    }
+    
+    public int getVolumeRestantSoute() {
+        return soute.getVolumeRestant();
     }
     
     public void charger(Transportable element) {
-        if(soute.peutCharger(element)) {
-            soute.charger(element);
-        }
-        //TODO gestion d'erreur
+        soute.charger(element);
     }
       
     public Transportable decharger(String nomElement) {
         return soute.decharger(nomElement);
     }
     
-    public void localiser(Transportable element) {
-        
+    public Vaisseau localiser(Transportable element) {
+        return soute.localiser(element);
     }
-    
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nIl reste " + getVolumeRestantSoute() + " "
+                + " de disponible dans la soute";
+    }
 }

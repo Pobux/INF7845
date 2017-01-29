@@ -5,7 +5,7 @@ import java.util.*;
 public class VaisseauArmeLourd extends VaisseauArme {
     
     public VaisseauArmeLourd(String nom, Object[] args) throws nonConstructionException {
-        super(nom, TypeProduit.ARMELEGER);
+        super(nom, TypeProduit.ARMELOURD);
         construire(args);
     }
     
@@ -13,8 +13,10 @@ public class VaisseauArmeLourd extends VaisseauArme {
         if(!elementCharges.containsKey(arme.getNom()) 
                 && compterEquipement() < capaciteMaximale ) {
             elementCharges.put(arme.getNom(), arme);
+            DB.ajouterProduitPlacer(arme);
+        } else {
+            capaciteAtteinteErreur();
         }
-        //TODO gestion des erreurs
     }
     
     public Map<String, Blaster> getListeBlaster() {
@@ -28,7 +30,6 @@ public class VaisseauArmeLourd extends VaisseauArme {
         
         return listeBlaster;
     }
-     
 }
 
 

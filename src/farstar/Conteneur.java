@@ -1,8 +1,8 @@
 package farstar;
 
-public class Container extends Transportable {
+public class Conteneur extends Transportable {
     
-    public Container(String nom, Object[] args) throws nonConstructionException {
+    public Conteneur(String nom, Object[] args) throws nonConstructionException {
         super(nom, TypeProduit.CONTAINER);
         construire(args);
     }

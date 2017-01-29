@@ -45,4 +45,15 @@ public class Blaster extends Arme {
     public void remplirPlein() {
         gazCourant = capaciteGaz;
     }
+    
+    public int getTauxRemplir() {
+        return gazCourant / capaciteGaz;
+    }
+
+    @Override
+    public String toString() {
+        String msg = super.toString();
+        msg += "Remplit a " + getTauxRemplir() + ".";
+        return msg;
+    }
 }

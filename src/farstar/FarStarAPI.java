@@ -1,22 +1,22 @@
 package farstar;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FarStarAPI {
-    Map<String, Vaisseau> VaisseauMap = new HashMap();
-    Map<String, Arme> ArmeMap = new HashMap();
+    Manager BD;
     
     public FarStarAPI() {
-        
+        BD = Manager.getInstance();
     }
     
     public Transportable creer(String nom, Object[] args) {
         if(valideNom(nom)) {
             try {
-                return UsineDeLespace.creerProduit(nom, args);    
+                Transportable produit = UsineFarStar.creerProduit(nom, args);
+                BD.ajouterProduitCree(produit);
+                return produit;
             } catch(nonConstructionException nc) {
                 System.out.println(nc.toString());
             }
@@ -50,18 +50,10 @@ public class FarStarAPI {
     }
     
     private boolean validationUnique(String nom) {
-        for (Map.Entry<String, Vaisseau> vaisseau : VaisseauMap.entrySet()) {
+        for (Map.Entry<String, Transportable> vaisseau : BD.produitCree.entrySet()) {
             String key = vaisseau.getKey();
             if(nom.equals(key)) {
-                System.out.println("Erreur : un vaisseau de ce nom existe déjà.");
-                return false;
-            }
-        }
-        
-        for (Map.Entry<String, Arme> arme : ArmeMap.entrySet()) {
-            String key = arme.getKey();
-            if(nom.equals(key)) {
-                System.out.println("Erreur : une arme de ce nom existe déjà.");
+                System.out.println("Erreur : Un produit de ce nom existe déjà.");
                 return false;
             }
         }
@@ -69,7 +61,17 @@ public class FarStarAPI {
         return true;
     }
     
-    
-    
-    
-}
+    public Vaisseau localiser(Transportable element) {
+        List<Vaisseau> listeVaisseau = BD.getListeVaisseau();
+        for (int i = 0; i < listeVaisseau.size(); i++) {
+            Vaisseau v = listeVaisseau.get(i);
+            Vaisseau trouver = v.localiser(element);
+            if(trouver != null) {
+                System.out.println(element.getNom() + " est dans " + trouver.getNom());
+                return trouver;
+            }
+        }
+        
+        return null; //aucun résultat n'a été trouvé
+    }
+ }

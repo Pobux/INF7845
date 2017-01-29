@@ -1,15 +1,15 @@
 package farstar;
 import java.util.HashMap;
 
-public class UsineDeLespace {
+public class UsineFarStar {
     public static Transportable creerProduit(String nom, Object[] args) 
             throws nonConstructionException {
-        String type = UsineDeLespace.getType(nom);
+        String type = UsineFarStar.getType(nom);
         switch(type) {
             case "VT": //0
                 return new Transport(nom, args);
-//            case "MR": //1
-//                return new Hybride(nom, args);
+            case "MR": //1
+                return new Hybride(nom, args);
             case "VC": //2
                 return new VaisseauArmeLeger(nom, args);
             case "VL": //3
@@ -19,11 +19,9 @@ public class UsineDeLespace {
             case "BL": //5
                 return new Blaster(nom, args);
             case "CT": //6
-                return new Container(nom, args);
+                return new Conteneur(nom, args);
             default:
-                System.out.println("Erreur : Ce type de produit n'existe pas.");
-                return null;
-                
+                throw new nonConstructionException("Ce type de produit n'existe pas");                
         }
     }
     

@@ -1,5 +1,6 @@
 package farstar;
 
 public interface Vaisseau{
-    public void localiser(Transportable element);
+    public Vaisseau localiser(Transportable element);
+    public String getNom();
 }

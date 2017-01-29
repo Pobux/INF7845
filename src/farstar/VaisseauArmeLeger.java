@@ -1,7 +1,5 @@
 package farstar;
 
-import java.util.*;
-
 public class VaisseauArmeLeger extends VaisseauArme {
     
     public VaisseauArmeLeger(String nom, Object[] args) throws nonConstructionException {
@@ -13,7 +11,9 @@ public class VaisseauArmeLeger extends VaisseauArme {
         if(!elementCharges.containsKey(arme.getNom()) 
                 && compterEquipement() < capaciteMaximale ) {
             elementCharges.put(arme.getNom(), arme);
+            DB.ajouterProduitPlacer(arme);
+        } else {
+            capaciteAtteinteErreur();
         }
-        //TODO gestion des erreurs
     }
 }

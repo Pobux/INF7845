@@ -1,9 +1,9 @@
 package farstar;
 
 abstract class Transportable {
-    String nom;
-    int volume;
-    int masse;
+    protected String nom;
+    protected int volume;
+    protected int masse;
     private TypeProduit type = null;
     
     public Transportable(String nom, TypeProduit type) {
@@ -74,4 +74,14 @@ abstract class Transportable {
     public void setMasse(int masse) {
         this.masse = masse;
     }
+
+    @Override
+    public String toString() {
+        return "Caractéristique de : " + getNom() + "\nType : " + type + "\n"
+                + "Masse : " + getMasse()
+                + "Volume : " + getVolume()
+                + "\n";
+    }
+    
+    
 }
