@@ -1,17 +1,26 @@
 package farstar;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class VaisseauArmeLeger extends VaisseauArme {
-    Map<String, Phaser> elementCharges = new HashMap();
     
-    public VaisseauArmeLeger(TypeProduit type, Object[] args) {
-        super(TypeProduit.ARMELEGER, args);
-        construire(args);
+    public VaisseauArmeLeger(String nom, Object[] args) throws nonConstructionException {
+        super(TypeProduit.ARMELEGER);
+
+        construire(nom, args);
     }
     
-    public void construire(Object[] args) {
+    @Override
+    public void construire(String nom, Object[] args) throws nonConstructionException {
+        //volume, masse, 2 Phaser
+        Class[] validation = {Integer.class, Integer.class, Integer.class};
+        if(valideArgs(args, validation)) {
+            setVolume((int) args[0]);
+            setMasse((int) args[1]);
+            setArmeMax((int) args[2]);
+        } else {
+            erreurNonConstruction();
+        }
         
     };
     
@@ -38,16 +47,5 @@ public class VaisseauArmeLeger extends VaisseauArme {
             elementCharges.remove(nomArme);
         }
         //TODO gestion des erreurs
-    }
-    
-    @Override
-    public int getMasse() {
-        int masseTotale = masse;
-        for (Map.Entry<String, Phaser> e : elementCharges.entrySet()) {
-            Phaser value = e.getValue();
-            masseTotale += value.getMasse();
-        }
-        
-        return masseTotale;
     }
 }

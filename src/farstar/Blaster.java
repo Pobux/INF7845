@@ -1,24 +1,22 @@
 package farstar;
 
 public class Blaster extends Arme {
-    private int capaciteGaz;
-    private int gazCourant;
     
-    public Blaster(String nom, int masse, int volume, int capaciteGaz) {
-        super(nom, masse, volume);
-        this.capaciteGaz = capaciteGaz;
-        gazCourant = 0;
+    public Blaster(String nom, Object[] args) throws nonConstructionException {
+        super(TypeProduit.PHASER);
+        construire(nom, args);
     }
     
-    public int getGazCourant() {
-        return gazCourant;
-    }
-    
-    public double pourcentageGazRestant() {
-        return gazCourant / capaciteGaz;
-    }
-    
-    public void recharger() {
-        gazCourant = capaciteGaz;
-    }
+    @Override
+    public void construire(String nom, Object[] args) throws nonConstructionException {
+        //volume, masse, 2 Phaser
+        Class[] validation = {Integer.class, Integer.class};
+        if(valideArgs(args, validation)) {
+            setVolume((int) args[0]);
+            setMasse((int) args[1]);;
+        } else {
+            erreurNonConstruction();
+        }
+        
+    };
 }

@@ -12,16 +12,20 @@ public class FarStarAPI {
     public FarStarAPI() {
         
     }
-    public Vaisseau creerVaisseau(String nomVaisseau) {
-        if(valideNom(nomVaisseau)) {
-            
-        }
-    }
     
-    public Arme creerArme(String nomArme) {
-        if(valideNom(nomArme)) {
-            
+    public Transportable creer(String nom, Object[] args) {
+        if(valideNom(nom)) {
+            try {
+                return UsineDeLespace.creerProduit(nom, args);    
+            } catch(nonConstructionException nc) {
+                System.out.println(nc.toString());
+            }
+        } else {
+            System.out.println("Erreur : Le nom est invalide. Il doit respecter "
+                + "le format suivant : [A-Z]{2}-[0-9]+ , e.g.: VT-10");
         }
+        
+        return null;
     }
     
     private boolean valideNom(String nom) {
@@ -40,8 +44,7 @@ public class FarStarAPI {
         if(m.find()) {
             return true;
         } else {
-            System.out.println("Erreur : Le nom est invalide. Il doit respecter "
-                    + "le format suivant : [A-Z]{2}-[0-9]+ , e.g.: VT-10");
+
             return false;
         }
     }

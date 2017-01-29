@@ -7,8 +7,8 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
     protected int capaciteMaximale;
     Map<String, Arme> elementCharges = new HashMap();
     
-    public VaisseauArme(TypeProduit type, Object[] args) {
-        super(type, args); //Même les classes abstraites doivent avoir un constructeur
+    public VaisseauArme(TypeProduit type) {
+        super(type); //Même les classes abstraites doivent avoir un constructeur
     }
     
     public void equiper(Arme arme) {
@@ -31,6 +31,7 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
         return elementCharges.size();
     }
     
+    @Override
     public int getMasse() {
         int masseTotale = masse;
         for (Map.Entry<String, Arme> e : elementCharges.entrySet()) {
@@ -39,6 +40,10 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
         }
         
         return masseTotale;
+    }
+    
+    public void setArmeMax(int max) {
+        this.capaciteMaximale = max;
     }
 }
  
