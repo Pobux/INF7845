@@ -18,10 +18,14 @@ public class Farstar {
         Blaster blaster1 = (Blaster) FA.creer("BL-1", new Object[]{2, 2, 100, 50});
         Blaster blaster2 = (Blaster) FA.creer("BL-2", new Object[]{2, 2, 50, 50});
         
+        Transport transport1 = (Transport) FA.creer("VT-1", new Object[]{100, 100, 300, 300});
+        Transport transport2 = (Transport) FA.creer("VT-2", new Object[]{100, 100, 300, 300});
+        
         Container container = (Container) FA.creer("CT-1", new Object[]{2,2});
         
         System.out.println("Vaisseau leger 1 : " + vaisseauLeger1.getNom());
         System.out.println("Vaisseau lourd 1 : " + vaisseauLourd1.getNom());
+        System.out.println("Transport 1 : " + transport1.getNom());
         System.out.println("Phaser 1 : " + phaser1.getNom());
         System.out.println("Blaster 1 : " + blaster1.getNom());
         System.out.println("Container : " + container.getNom());

@@ -13,7 +13,7 @@ public class Container extends Transportable {
         Class[] validation = {Integer.class, Integer.class};
         if(valideArgs(args, validation)) {
             setVolume((int) args[0]);
-            setMasse((int) args[1]);;
+            setMasse((int) args[1]);
         } else {
             erreurNonConstruction();
         }  

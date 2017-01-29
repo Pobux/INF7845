@@ -5,7 +5,7 @@ public final class Hybride extends VaisseauArmeLourd
     
     private Soute soute;
     
-    public Hybride(String nom, int masse, int volume,  int capaciteMaximale) {
+    public Hybride(String nom, int masse, int volume, int capaciteMaximale) {
         super(nom, masse, volume, capaciteMaximale);
         setSoute(soute);
     }

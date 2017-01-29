@@ -5,7 +5,7 @@ public class Blaster extends Arme {
     int gazCourant = 0;
     
     public Blaster(String nom, Object[] args) throws nonConstructionException {
-        super(nom, TypeProduit.PHASER);
+        super(nom, TypeProduit.BLASTER);
         construire(args);
     }
     

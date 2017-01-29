@@ -7,9 +7,9 @@ public class UsineDeLespace {
         String type = UsineDeLespace.getType(nom);
         switch(type) {
             case "VT": //0
-                return new Transport(args);
-//            case HYBRIDE: //1
-//                return new Hybride(args);
+                return new Transport(nom, args);
+//            case "MR": //1
+//                return new Hybride(nom, args);
             case "VC": //2
                 return new VaisseauArmeLeger(nom, args);
             case "VL": //3

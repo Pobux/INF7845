@@ -16,6 +16,18 @@ public class VaisseauArmeLourd extends VaisseauArme {
         }
         //TODO gestion des erreurs
     }
+    
+    public Map<String, Blaster> getListeBlaster() {
+        Map<String, Blaster> listeBlaster = new HashMap();
+        for (Map.Entry<String, Arme> e : elementCharges.entrySet()) {
+            Arme value = e.getValue();
+            if(value.getClass() == Blaster.class) {
+                listeBlaster.put(nom, (Blaster) value);
+            }
+        }
+        
+        return listeBlaster;
+    }
      
 }
 

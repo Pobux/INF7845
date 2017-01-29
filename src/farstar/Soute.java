@@ -43,9 +43,13 @@ public class Soute {
                 volumePotentiel <= capaciteVolume;
     }
    
-    public void decharger(Transportable element) {
-        if(elementCharges.containsKey(element.getNom())) {
-            elementCharges.remove(element.getNom());
+    public Transportable decharger(String nomElement) {
+        if(elementCharges.containsKey(nomElement)) {
+            Transportable element = elementCharges.get(nomElement);
+            elementCharges.remove(nomElement);
+            return element;
         }
+        
+        return null;
     }
 }
