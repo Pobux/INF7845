@@ -1,15 +1,22 @@
 package farstar;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-//public class VaisseauArmeLourd extends VaisseauArme {
-//    Map<String, Arme> elementCharges = new HashMap();
-//    
-//    public VaisseauArmeLourd(String nom, int masse, int volume, int capaciteMaximale) {
-//        super(nom, masse, volume, capaciteMaximale);
-//    }
-//    
-//    
-//}
+public class VaisseauArmeLourd extends VaisseauArme {
+    
+    public VaisseauArmeLourd(String nom, Object[] args) throws nonConstructionException {
+        super(nom, TypeProduit.ARMELEGER);
+        construire(args);
+    }
+    
+    public void equiper(Arme arme) {
+        if(!elementCharges.containsKey(arme.getNom()) 
+                && compterEquipement() < capaciteMaximale ) {
+            elementCharges.put(arme.getNom(), arme);
+        }
+        //TODO gestion des erreurs
+    }
+     
+}
+
 

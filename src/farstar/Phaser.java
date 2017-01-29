@@ -3,13 +3,13 @@ package farstar;
 public class Phaser extends Arme {
     
     public Phaser(String nom, Object[] args) throws nonConstructionException {
-        super(TypeProduit.PHASER);
-        construire(nom, args);
+        super(nom, TypeProduit.PHASER);
+        construire(args);
     }
     
     @Override
-    public void construire(String nom, Object[] args) throws nonConstructionException {
-        //volume, masse, 2 Phaser
+    public void construire(Object[] args) throws nonConstructionException {
+        //volume, masse
         Class[] validation = {Integer.class, Integer.class};
         if(valideArgs(args, validation)) {
             setVolume((int) args[0]);

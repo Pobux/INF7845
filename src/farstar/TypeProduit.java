@@ -6,6 +6,5 @@ public enum TypeProduit {
     ARMELOURD, //3
     PHASER, //4
     BLASTER, //5
-    SOUTE, //6
-    CONTAINER //7
+    CONTAINER //6
 }

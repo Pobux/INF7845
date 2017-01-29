@@ -6,16 +6,22 @@ abstract class Transportable {
     int masse;
     private TypeProduit type = null;
     
-    public Transportable(TypeProduit type) {
+    public Transportable(String nom, TypeProduit type) {
         this.type = type;
+        this.nom = nom;
     }
     
-    protected abstract void construire(String nom, Object[] args) 
+    protected abstract void construire(Object[] args) 
             throws nonConstructionException;
     
     
     protected void erreurNonConstruction() throws nonConstructionException {
-        throw new nonConstructionException("Erreur : Vous ne pouvez pas construire " + type);
+        throw new nonConstructionException("Erreur : Vous ne pouvez pas construire " + type + " "
+                + "arguments invalide");
+    }
+    
+    protected void erreurNonConstruction(String msg) throws nonConstructionException {
+        throw new nonConstructionException(msg);
     }
     
     protected boolean valideArgs(Object[] args, Class[] validations) {

@@ -1,7 +1,7 @@
 package farstar;
 
 public abstract class Arme extends Transportable {
-    public Arme(TypeProduit type) {
-        super(type); //Même les classes abstraites doivent avoir un constructeur
+    public Arme(String nom, TypeProduit type) {
+        super(nom, type); //Même les classes abstraites doivent avoir un constructeur
     }
 }
