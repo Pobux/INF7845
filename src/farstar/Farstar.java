@@ -3,8 +3,7 @@ package farstar;
 public class Farstar {
 
     public static void main(String[] args) {
-        //Creation de différents vaisseau
-        //La creation s'insère dans les managers
+        //Creation de différents vaisseaux
         //Lors de commande on appelle le manager
         FarStarAPI FA = new FarStarAPI();
         
@@ -21,11 +20,14 @@ public class Farstar {
         Transport transport1 = (Transport) FA.creer("VT-1", new Object[]{100, 100, 300, 300});
         Transport transport2 = (Transport) FA.creer("VT-2", new Object[]{100, 100, 300, 300});
         
+        Hybride hybride1 = (Hybride) FA.creer("MR-1", new Object[]{20, 20, 3, 100, 100});
+        
         Container container = (Container) FA.creer("CT-1", new Object[]{2,2});
         
         System.out.println("Vaisseau leger 1 : " + vaisseauLeger1.getNom());
         System.out.println("Vaisseau lourd 1 : " + vaisseauLourd1.getNom());
         System.out.println("Transport 1 : " + transport1.getNom());
+        System.out.println("Hybride 1 : " + hybride1.getNom());
         System.out.println("Phaser 1 : " + phaser1.getNom());
         System.out.println("Blaster 1 : " + blaster1.getNom());
         System.out.println("Container : " + container.getNom());
