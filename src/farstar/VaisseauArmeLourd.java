@@ -11,7 +11,7 @@ public class VaisseauArmeLourd extends VaisseauArme {
     
     public void equiper(Arme arme) {
         if(!elementCharges.containsKey(arme.getNom()) 
-                && compterEquipement() < capaciteMaximale ) {
+                && compterEquipement() < capaciteMaximaleArme ) {
             elementCharges.put(arme.getNom(), arme);
             DB.ajouterProduitPlacer(arme);
         } else {

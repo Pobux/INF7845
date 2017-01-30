@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class VaisseauArme extends Transportable implements Vaisseau {
-    protected int capaciteMaximale;
+    protected int capaciteMaximaleArme;
     protected Map<String, Arme> elementCharges = new HashMap();
     Manager DB;
     
@@ -15,7 +15,7 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
     
     @Override
     protected void construire(Object[] args) throws nonConstructionException {
-        //volume, masse, 2 Phaser
+        //volume, masse, arme
         Class[] validation = {Integer.class, Integer.class, Integer.class};
         if(valideArgs(args, validation)) {
             setVolume((int) args[0]);
@@ -42,13 +42,18 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
         return elementCharges.size();
     }
        
-    Arme desequiper(String armeNom) {
-        if(elementCharges.containsKey(armeNom)) {
-            Arme arme = elementCharges.remove(armeNom);
-            DB.retirerProduitPlacer(arme);
-            return arme;
+    Arme desequiper(Arme arme) {
+        if(!DB.produitDisponible(this)) {
+            System.out.println("Erreur : Décharger l'arme " + arme.getNom() + " avant");
+            return null;
+        }
+        
+        if(elementCharges.containsKey(arme.getNom())) {
+            Arme armeRetirer = elementCharges.remove(arme.getNom());
+            DB.retirerProduitPlacer(armeRetirer);
+            return armeRetirer;
         } else {
-            System.out.println("Erreur : " + armeNom + " n'est pas chargé.");
+            System.out.println("Erreur : " + arme.getNom() + " n'est pas chargé.");
             return null;
         }
     }
@@ -65,20 +70,21 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
     }
     
     void setArmeMax(int max) {
-        this.capaciteMaximale = max;
+        this.capaciteMaximaleArme = max;
     }
     
     protected void capaciteAtteinteErreur() {
-        System.out.println("Erreur : Capacité d'armes atteinte.");
+        System.out.println("Erreur : Capacité d'armes atteinte ou arme déjà équipée.");
     }
     
     int getVolume() {
         int volume = this.volume;
+ 
         for (Map.Entry<String, Arme> entry : elementCharges.entrySet()) {
             Arme value = entry.getValue();
             volume += value.getVolume();
         }
-        
+
         return volume;
     }
 

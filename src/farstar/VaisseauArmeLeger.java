@@ -8,12 +8,8 @@ public class VaisseauArmeLeger extends VaisseauArme {
     }
     
     void equiper(Phaser arme) {
-        if(!DB.produitDisponible(arme)) {
-            return;
-        }
-        
         if(!elementCharges.containsKey(arme.getNom()) 
-                && compterEquipement() < capaciteMaximale) {
+                && compterEquipement() < capaciteMaximaleArme) {
             elementCharges.put(arme.getNom(), arme);
             DB.ajouterProduitPlacer(arme);
         } else {

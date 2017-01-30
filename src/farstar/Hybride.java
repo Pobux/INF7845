@@ -36,20 +36,21 @@ public class Hybride extends VaisseauArmeLourd
     
     @Override
     int getMasse() {
-        return masse + soute.getMasseCourante();
+        return super.getMasse() + soute.getMasseCourante();
     }
     
     @Override
     int getVolume() {
-        return volume + soute.getCapaciteVolume();
+        return super.getVolume() + soute.getCapaciteVolume();
     }
     
     @Override
     public void charger(Transportable element) {
         if(soute.peutCharger(element)) {
             soute.charger(element);
+        } else {
+            System.out.println("Erreur : " + getNom() + " ne peut charger " + element.getNom());
         }
-        //TODO gestion d'erreur
     }
     
     @Override

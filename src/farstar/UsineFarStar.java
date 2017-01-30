@@ -1,5 +1,4 @@
 package farstar;
-import java.util.HashMap;
 
 class UsineFarStar {
     static Transportable creerProduit(String nom, Object[] args) 

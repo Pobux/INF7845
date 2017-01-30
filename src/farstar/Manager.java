@@ -33,11 +33,16 @@ class Manager {
     }
 
     boolean produitDisponible(Transportable produit) {
-        boolean resultat = produitCree.containsKey(produit.getNom()) &&
-                !produitPlacer.containsKey(produit.getNom());
+        boolean resultat = true;
         
-        if(!resultat) {
+        if(!produitCree.containsKey(produit.getNom())) {
+            System.out.println("Erreur : " + produit.getNom() + " n'est pas créé.");
+            resultat = false;
+        }
+        
+        if(!produitPlacer.containsKey(produit.getNom())) {
             System.out.println("Erreur : " + produit.getNom() + " est déjà placé.");
+            resultat = false;
         }
         
         return resultat;

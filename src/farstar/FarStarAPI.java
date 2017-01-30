@@ -67,8 +67,8 @@ public class FarStarAPI {
         vaisseau.equiper(arme);
     }
     
-    public Arme desequiperVaisseau(VaisseauArme vaisseau, String nomArme) {
-        return vaisseau.desequiper(nomArme);
+    public Arme desequiperVaisseau(VaisseauArme vaisseau, Arme arme) {
+        return vaisseau.desequiper(arme);
     }
     
     public void charger(Chargeable vaisseau, Transportable produit) {

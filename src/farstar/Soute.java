@@ -4,15 +4,13 @@ import java.util.*;
 public class Soute {
     private int capaciteMasse;
     private int capaciteVolume;
-    private int masseCourante;
-    private int volumeRestant;
     Map<String, Transportable> elementCharges = new HashMap();
     Manager DB;
     Vaisseau parent;
     
-    Soute(int capaciteMasse, int capaciteVolume, Vaisseau vaisseau) {
+    Soute(int capaciteVolume, int capaciteMasse, Vaisseau vaisseau) {
         this.capaciteMasse = capaciteMasse;
-        this.capaciteVolume = volumeRestant = capaciteVolume;
+        this.capaciteVolume = capaciteVolume;
         DB = Manager.getInstance();
         parent = vaisseau;
     }
@@ -26,30 +24,51 @@ public class Soute {
     }
 
     int getMasseCourante() {
-        return masseCourante;
+        int masse = 0;
+        
+        for (Map.Entry<String, Transportable> entry : elementCharges.entrySet()) {
+            Transportable value = entry.getValue();
+            masse += value.getMasse();
+        }
+        
+        return masse;
     }
 
     int getVolumeRestant() {
-        return volumeRestant;
+        int volumeCharge = 0;
+        
+        for (Map.Entry<String, Transportable> entry : elementCharges.entrySet()) {
+            Transportable value = entry.getValue();
+            volumeCharge += value.getVolume();
+        }
+        
+        return capaciteVolume - volumeCharge;
     }
     
     void charger(Transportable element) {
         if(peutCharger(element)) {
             elementCharges.put(element.getNom(), element);
             DB.ajouterProduitPlacer(element);
-            volumeRestant = volumeRestant - element.getVolume();
-            masseCourante = masseCourante + element.getMasse();
         } else {
             System.out.println("Erreur : Il n'y plus de place pour charger " + element.getNom());
         }
     }
     
     boolean peutCharger(Transportable element) {
-        int massePotentielle = masseCourante + element.getMasse();
-        int volumeRestantPotentiel = volumeRestant - element.getVolume();
+        int massePotentielle = getMasseCourante() + element.getMasse();
+        int volumeRestantPotentiel = getVolumeRestant() - element.getVolume();
         
-        return massePotentielle <= getCapaciteMasse() && 
-                volumeRestantPotentiel >= 0;
+        if(massePotentielle > getCapaciteMasse()) {
+            System.out.println("La capacité maximale de la masse est dépassée.");
+            return false;
+        }
+        
+        if(volumeRestantPotentiel < 0) {
+            System.out.println("La capacité maximale du volume est dépassée.");
+            return false;
+        }
+        
+        return true;
     }
    
     Transportable decharger(String nomElement) {
@@ -57,8 +76,6 @@ public class Soute {
             Transportable element = elementCharges.get(nomElement);
             DB.retirerProduitPlacer(element);
             elementCharges.remove(nomElement);
-            masseCourante = masseCourante - element.getMasse();
-            volumeRestant = volumeRestant + element.getVolume();
             return element;
         } else {
             System.out.println("Erreur : Le produit " + nomElement + " est inexistant");

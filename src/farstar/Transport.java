@@ -3,9 +3,10 @@ import java.util.*;
 
 public class Transport extends Transportable implements Chargeable, Vaisseau {
     private Soute soute;
-    
+    private Manager BD;
     public Transport(String nom, Object[] args)  throws nonConstructionException {
         super(nom, TypeProduit.TRANSPORT);
+        BD = Manager.getInstance();
         construire(args);
     }
     
@@ -28,12 +29,13 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
     
     @Override
     public int getMasse() {
-        return masse + soute.getMasseCourante();
+        return super.getMasse() + soute.getMasseCourante();
     }
     
     @Override
     public int getVolume() {
-        return volume + soute.getCapaciteVolume();
+            
+        return super.getVolume() + soute.getCapaciteVolume();
     }
     
     public int getVolumeRestantSoute() {
@@ -41,7 +43,7 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
     }
     
     public void charger(Transportable element) {
-        soute.charger(element);
+            soute.charger(element);    
     }
       
     public Transportable decharger(String nomElement) {
