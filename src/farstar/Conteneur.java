@@ -2,13 +2,13 @@ package farstar;
 
 public class Conteneur extends Transportable {
     
-    public Conteneur(String nom, Object[] args) throws nonConstructionException {
+    Conteneur(String nom, Object[] args) throws nonConstructionException {
         super(nom, TypeProduit.CONTAINER);
         construire(args);
     }
     
     @Override
-    public void construire(Object[] args) throws nonConstructionException {
+    protected void construire(Object[] args) throws nonConstructionException {
         //volume, masse
         Class[] validation = {Integer.class, Integer.class};
         if(valideArgs(args, validation)) {

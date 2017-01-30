@@ -6,44 +6,51 @@ class Manager {
     Une base de données aurait été plus intéressante mais hors 
     sujet de ce TP.
     */
-    Map<String, Transportable> produitCree;
-    Map<String, Transportable> produitPlacer;
+    Map<String, Transportable> produitCree = new HashMap();
+    Map<String, Transportable> produitPlacer = new HashMap();
 
     private static Manager instance = null;
 
     protected Manager() {}
 
-    public static Manager getInstance() {
+    static Manager getInstance() {
        if(instance == null) {
           instance = new Manager();
        }
        return instance;
     }
 
-    public void ajouterProduitCree(Transportable produit) {
+    void ajouterProduitCree(Transportable produit) {
         produitCree.put(produit.getNom(), produit);
     }
     
-    public void ajouterProduitPlacer(Transportable produit) {
+    void ajouterProduitPlacer(Transportable produit) {
         produitPlacer.put(produit.getNom(), produit);
     }
 
-    public void retirerProduitPlacer(Transportable produit) {
+    void retirerProduitPlacer(Transportable produit) {
         produitPlacer.remove(produit.getNom());
     }
 
-    public boolean produitDisponible(Transportable produit) {
-        return produitCree.containsKey(produit.getNom()) &&
+    boolean produitDisponible(Transportable produit) {
+        boolean resultat = produitCree.containsKey(produit.getNom()) &&
                 !produitPlacer.containsKey(produit.getNom());
+        
+        if(!resultat) {
+            System.out.println("Erreur : " + produit.getNom() + " est déjà placé.");
+        }
+        
+        return resultat;
     }
     
-    public List<Vaisseau> getListeVaisseau() {
+    List<Vaisseau> getListeVaisseau() {
         List<Vaisseau> listeVaisseau = new ArrayList();
         
         for (Map.Entry<String, Transportable> e : produitCree.entrySet()) {
             Transportable value = e.getValue();
-            
-            if(value.getClass().isInstance(Vaisseau.class)) {
+
+            if(Vaisseau.class.isInstance(value)) {
+                System.out.println(value);
                 listeVaisseau.add((Vaisseau) value);
             }
         }

@@ -1,4 +1,5 @@
 package farstar;
+import java.util.*;
 
 public class Transport extends Transportable implements Chargeable, Vaisseau {
     private Soute soute;
@@ -53,7 +54,13 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
 
     @Override
     public String toString() {
-        return super.toString() + "\nIl reste " + getVolumeRestantSoute() + " "
-                + " de disponible dans la soute";
+        String msg = super.toString() + "\nIl reste " + getVolumeRestantSoute() + " "
+                + "de volume disponible dans la soute.\nChargement :\n";
+        for (Map.Entry<String, Transportable> en : soute.elementCharges.entrySet()) {
+            Object key = en.getKey();
+            msg += key + "\n";
+        }
+        
+        return msg += "\n";
     }
 }

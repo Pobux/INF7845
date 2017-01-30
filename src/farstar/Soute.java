@@ -1,6 +1,5 @@
 package farstar;
 import java.util.*;
-import java.lang.reflect.Method;
 
 public class Soute {
     private int capaciteMasse;
@@ -11,30 +10,30 @@ public class Soute {
     Manager DB;
     Vaisseau parent;
     
-    public Soute(int capaciteMasse, int capaciteVolume, Vaisseau vaisseau) {
+    Soute(int capaciteMasse, int capaciteVolume, Vaisseau vaisseau) {
         this.capaciteMasse = capaciteMasse;
         this.capaciteVolume = volumeRestant = capaciteVolume;
         DB = Manager.getInstance();
         parent = vaisseau;
     }
 
-    public int getCapaciteMasse() {
+    int getCapaciteMasse() {
         return capaciteMasse;
     }
 
-    public int getCapaciteVolume() {
+    int getCapaciteVolume() {
         return capaciteVolume;
     }
 
-    public int getMasseCourante() {
+    int getMasseCourante() {
         return masseCourante;
     }
 
-    public int getVolumeRestant() {
+    int getVolumeRestant() {
         return volumeRestant;
     }
     
-    public void charger(Transportable element) {
+    void charger(Transportable element) {
         if(peutCharger(element)) {
             elementCharges.put(element.getNom(), element);
             DB.ajouterProduitPlacer(element);
@@ -45,7 +44,7 @@ public class Soute {
         }
     }
     
-    public boolean peutCharger(Transportable element) {
+    boolean peutCharger(Transportable element) {
         int massePotentielle = masseCourante + element.getMasse();
         int volumeRestantPotentiel = volumeRestant - element.getVolume();
         
@@ -53,7 +52,7 @@ public class Soute {
                 volumeRestantPotentiel >= 0;
     }
    
-    public Transportable decharger(String nomElement) {
+    Transportable decharger(String nomElement) {
         if(elementCharges.containsKey(nomElement)) {
             Transportable element = elementCharges.get(nomElement);
             DB.retirerProduitPlacer(element);
@@ -68,7 +67,7 @@ public class Soute {
         return null;
     }
     
-    public Vaisseau localiser(Transportable element) {
+    Vaisseau localiser(Transportable element) {
         for (Map.Entry<String, Transportable> e : elementCharges.entrySet()) {
             if(element.getNom().equals(e.getKey())) {
                 return parent;

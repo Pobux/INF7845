@@ -4,13 +4,13 @@ public class Blaster extends Arme {
     int capaciteGaz;
     int gazCourant = 0;
     
-    public Blaster(String nom, Object[] args) throws nonConstructionException {
+    Blaster(String nom, Object[] args) throws nonConstructionException {
         super(nom, TypeProduit.BLASTER);
         construire(args);
     }
     
     @Override
-    public void construire(Object[] args) throws nonConstructionException {
+    protected void construire(Object[] args) throws nonConstructionException {
         //volume, masse, capacite, gaz courant
         Class[] validation = {Integer.class, Integer.class, Integer.class, Integer.class};
         if(valideArgs(args, validation)) {
@@ -22,7 +22,7 @@ public class Blaster extends Arme {
         }
     };
     
-    public void setGaz(int capaciteGaz, int gazCourant) throws nonConstructionException {
+    void setGaz(int capaciteGaz, int gazCourant) throws nonConstructionException {
         if(gazCourant > capaciteGaz) {
             erreurNonConstruction("Le gaz courant est supérieur à la capacité du blaster " + getNom());
         }
@@ -31,22 +31,22 @@ public class Blaster extends Arme {
         remplir(gazCourant);
     }
     
-    public void setCapaciteGaz(int capaciteGaz) {
+    void setCapaciteGaz(int capaciteGaz) {
         this.capaciteGaz = capaciteGaz;
     }
     
-    public void remplir(int gaz) {
+    void remplir(int gaz) {
         gazCourant = gazCourant + gaz;
         if(gazCourant > capaciteGaz) {
             gazCourant = capaciteGaz;
         }
     }
     
-    public void remplirPlein() {
+    void remplirPlein() {
         gazCourant = capaciteGaz;
     }
     
-    public int getTauxRemplir() {
+    int getTauxRemplir() {
         return gazCourant / capaciteGaz;
     }
 
@@ -54,6 +54,6 @@ public class Blaster extends Arme {
     public String toString() {
         String msg = super.toString();
         msg += "Remplit a " + getTauxRemplir() + ".";
-        return msg;
+        return msg + "\n";
     }
 }

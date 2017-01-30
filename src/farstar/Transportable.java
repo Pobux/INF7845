@@ -1,12 +1,12 @@
 package farstar;
 
-abstract class Transportable {
+public abstract class Transportable {
     protected String nom;
-    protected int volume;
-    protected int masse;
+    protected int volume = 0;
+    protected int masse = 0;
     private TypeProduit type = null;
     
-    public Transportable(String nom, TypeProduit type) {
+    Transportable(String nom, TypeProduit type) {
         this.type = type;
         this.nom = nom;
     }
@@ -47,31 +47,31 @@ abstract class Transportable {
         return nom;
     }
     
-    public void setNom(String nom) {
+    void setNom(String nom) {
         this.nom = nom;
     }
     
-    public int getVolume() {
+    int getVolume() {
         return volume;
     }
     
-    public void setVolume(int volume) {
+    void setVolume(int volume) {
         this.volume = volume;
     }
     
-    public TypeProduit getType() {
+    TypeProduit getType() {
         return type;
     }
     
-    public void setType(TypeProduit type) {
+    void setType(TypeProduit type) {
         this.type = type;
     }
     
-    public int getMasse() {
+    int getMasse() {
         return masse;
     };
     
-    public void setMasse(int masse) {
+    void setMasse(int masse) {
         this.masse = masse;
     }
 
@@ -79,7 +79,7 @@ abstract class Transportable {
     public String toString() {
         return "Caractéristique de : " + getNom() + "\nType : " + type + "\n"
                 + "Masse : " + getMasse()
-                + "Volume : " + getVolume()
+                + "\nVolume : " + getVolume()
                 + "\n";
     }
     

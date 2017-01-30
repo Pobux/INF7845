@@ -20,9 +20,6 @@ public class FarStarAPI {
             } catch(nonConstructionException nc) {
                 System.out.println(nc.toString());
             }
-        } else {
-            System.out.println("Erreur : Le nom est invalide. Il doit respecter "
-                + "le format suivant : [A-Z]{2}-[0-9]+ , e.g.: VT-10");
         }
         
         return null;
@@ -44,7 +41,8 @@ public class FarStarAPI {
         if(m.find()) {
             return true;
         } else {
-
+            System.out.println("Erreur : Le nom est invalide. Il doit respecter "
+                + "le format suivant : [A-Z]{2}-[0-9]+ , e.g.: VT-10");
             return false;
         }
     }
@@ -61,10 +59,31 @@ public class FarStarAPI {
         return true;
     }
     
+    public void equiperVaisseauLourd(VaisseauArmeLourd vaisseau, Arme arme) {
+        vaisseau.equiper(arme);
+    }
+    
+    public void equiperVaisseauLeger(VaisseauArmeLeger vaisseau, Phaser arme) {
+        vaisseau.equiper(arme);
+    }
+    
+    public Arme desequiperVaisseau(VaisseauArme vaisseau, String nomArme) {
+        return vaisseau.desequiper(nomArme);
+    }
+    
+    public void charger(Chargeable vaisseau, Transportable produit) {
+        vaisseau.charger(produit);
+    }
+    
+    public Transportable decharger(Chargeable vaisseau, String nomProduit) {
+        return vaisseau.decharger(nomProduit);
+    }
+    
     public Vaisseau localiser(Transportable element) {
         List<Vaisseau> listeVaisseau = BD.getListeVaisseau();
         for (int i = 0; i < listeVaisseau.size(); i++) {
             Vaisseau v = listeVaisseau.get(i);
+            System.out.println(v);
             Vaisseau trouver = v.localiser(element);
             if(trouver != null) {
                 System.out.println(element.getNom() + " est dans " + trouver.getNom());

@@ -1,5 +1,5 @@
 package farstar;
-public enum TypeProduit {
+enum TypeProduit {
     TRANSPORT, //0
     HYBRIDE, //1
     ARMELEGER, //2

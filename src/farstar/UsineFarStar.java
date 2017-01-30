@@ -1,8 +1,8 @@
 package farstar;
 import java.util.HashMap;
 
-public class UsineFarStar {
-    public static Transportable creerProduit(String nom, Object[] args) 
+class UsineFarStar {
+    static Transportable creerProduit(String nom, Object[] args) 
             throws nonConstructionException {
         String type = UsineFarStar.getType(nom);
         switch(type) {

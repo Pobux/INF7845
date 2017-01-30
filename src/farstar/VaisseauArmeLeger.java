@@ -2,14 +2,18 @@ package farstar;
 
 public class VaisseauArmeLeger extends VaisseauArme {
     
-    public VaisseauArmeLeger(String nom, Object[] args) throws nonConstructionException {
+    VaisseauArmeLeger(String nom, Object[] args) throws nonConstructionException {
         super(nom, TypeProduit.ARMELEGER);
         construire(args);
     }
     
-    public void equiper(Phaser arme) {
+    void equiper(Phaser arme) {
+        if(!DB.produitDisponible(arme)) {
+            return;
+        }
+        
         if(!elementCharges.containsKey(arme.getNom()) 
-                && compterEquipement() < capaciteMaximale ) {
+                && compterEquipement() < capaciteMaximale) {
             elementCharges.put(arme.getNom(), arme);
             DB.ajouterProduitPlacer(arme);
         } else {

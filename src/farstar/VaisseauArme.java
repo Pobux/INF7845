@@ -8,13 +8,13 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
     protected Map<String, Arme> elementCharges = new HashMap();
     Manager DB;
     
-    public VaisseauArme(String nom, TypeProduit type) {
+    VaisseauArme(String nom, TypeProduit type) {
         super(nom, type); //Même les classes abstraites doivent avoir un constructeur
         DB = Manager.getInstance();
     }
     
     @Override
-    public void construire(Object[] args) throws nonConstructionException {
+    protected void construire(Object[] args) throws nonConstructionException {
         //volume, masse, 2 Phaser
         Class[] validation = {Integer.class, Integer.class, Integer.class};
         if(valideArgs(args, validation)) {
@@ -28,18 +28,21 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
     
         
     public Vaisseau localiser(Transportable element) {
+        if(elementCharges.containsKey(element.getNom())) {
+            return this;
+        }
         return null;
     }
     
-    public Map<String, Arme> getEquipement() {
+    Map<String, Arme> getEquipement() {
         return elementCharges;
     }
     
-    public int compterEquipement() {
+    int compterEquipement() {
         return elementCharges.size();
     }
        
-    public Arme desequiper(String armeNom) {
+    Arme desequiper(String armeNom) {
         if(elementCharges.containsKey(armeNom)) {
             Arme arme = elementCharges.remove(armeNom);
             DB.retirerProduitPlacer(arme);
@@ -51,7 +54,7 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
     }
     
     @Override
-    public int getMasse() {
+    int getMasse() {
         int masseTotale = masse;
         for (Map.Entry<String, Arme> e : elementCharges.entrySet()) {
             Arme value = e.getValue();
@@ -61,12 +64,22 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
         return masseTotale;
     }
     
-    public void setArmeMax(int max) {
+    void setArmeMax(int max) {
         this.capaciteMaximale = max;
     }
     
     protected void capaciteAtteinteErreur() {
         System.out.println("Erreur : Capacité d'armes atteinte.");
+    }
+    
+    int getVolume() {
+        int volume = this.volume;
+        for (Map.Entry<String, Arme> entry : elementCharges.entrySet()) {
+            Arme value = entry.getValue();
+            volume += value.getVolume();
+        }
+        
+        return volume;
     }
 
     @Override
@@ -79,7 +92,7 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
             msg += value.getNom() + "\n";
         }
         
-        return msg;
+        return msg + "\n";
     }
     
     
