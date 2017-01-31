@@ -31,5 +31,3 @@ public class VaisseauArmeLourd extends VaisseauArme {
         return listeBlaster;
     }
 }
-
-

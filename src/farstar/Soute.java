@@ -88,9 +88,8 @@ public class Soute {
         for (Map.Entry<String, Transportable> e : elementCharges.entrySet()) {
             if(element.getNom().equals(e.getKey())) {
                 return parent;
-            }        
+            }      
         }
-        
         return localiserEnProfondeur(element);
     }
     

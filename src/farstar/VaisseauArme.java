@@ -26,7 +26,6 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
         }
     };
     
-        
     public Vaisseau localiser(Transportable element) {
         if(elementCharges.containsKey(element.getNom())) {
             return this;
@@ -43,11 +42,6 @@ public abstract class VaisseauArme extends Transportable implements Vaisseau {
     }
        
     Arme desequiper(Arme arme) {
-        if(!DB.produitDisponible(this)) {
-            System.out.println("Erreur : Décharger l'arme " + arme.getNom() + " avant");
-            return null;
-        }
-        
         if(elementCharges.containsKey(arme.getNom())) {
             Arme armeRetirer = elementCharges.remove(arme.getNom());
             DB.retirerProduitPlacer(armeRetirer);

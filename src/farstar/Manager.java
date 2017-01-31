@@ -40,7 +40,7 @@ class Manager {
             resultat = false;
         }
         
-        if(!produitPlacer.containsKey(produit.getNom())) {
+        if(produitPlacer.containsKey(produit.getNom())) {
             System.out.println("Erreur : " + produit.getNom() + " est déjà placé.");
             resultat = false;
         }
@@ -55,7 +55,6 @@ class Manager {
             Transportable value = e.getValue();
 
             if(Vaisseau.class.isInstance(value)) {
-                System.out.println(value);
                 listeVaisseau.add((Vaisseau) value);
             }
         }

@@ -15,7 +15,7 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
         //volume, masse, capacite volume soute, capacite masse soute
         Class[] validation = {Integer.class, Integer.class, Integer.class, Integer.class};
         if(valideArgs(args, validation)) {
-            setVolume((int) args[0]);
+            setVolume((int) args[0] - (int) args[2]);
             setMasse((int) args[1]);
             creerSoute((int) args[2], (int) args[3]);
         } else {
@@ -34,7 +34,6 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
     
     @Override
     public int getVolume() {
-            
         return super.getVolume() + soute.getCapaciteVolume();
     }
     
@@ -43,7 +42,7 @@ public class Transport extends Transportable implements Chargeable, Vaisseau {
     }
     
     public void charger(Transportable element) {
-            soute.charger(element);    
+        soute.charger(element);    
     }
       
     public Transportable decharger(String nomElement) {

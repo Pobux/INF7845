@@ -60,11 +60,15 @@ public class FarStarAPI {
     }
     
     public void equiperVaisseauLourd(VaisseauArmeLourd vaisseau, Arme arme) {
-        vaisseau.equiper(arme);
+        if(BD.produitDisponible(arme)) {
+            vaisseau.equiper(arme);    
+        }
     }
     
     public void equiperVaisseauLeger(VaisseauArmeLeger vaisseau, Phaser arme) {
-        vaisseau.equiper(arme);
+        if(BD.produitDisponible(arme)) {
+            vaisseau.equiper(arme);    
+        }
     }
     
     public Arme desequiperVaisseau(VaisseauArme vaisseau, Arme arme) {
@@ -83,8 +87,8 @@ public class FarStarAPI {
         List<Vaisseau> listeVaisseau = BD.getListeVaisseau();
         for (int i = 0; i < listeVaisseau.size(); i++) {
             Vaisseau v = listeVaisseau.get(i);
-            System.out.println(v);
             Vaisseau trouver = v.localiser(element);
+            
             if(trouver != null) {
                 System.out.println(element.getNom() + " est dans " + trouver.getNom());
                 return trouver;

@@ -19,7 +19,7 @@ public class Hybride extends VaisseauArmeLourd
                               Integer.class};
         
         if(valideArgs(args, validation)) {
-            setVolume((int) args[0]);
+            setVolume((int) args[0] - (int) args[3]);
             setMasse((int) args[1]);
             setArmeMax((int) args[2]);
             creerSoute((int) args[3], (int) args[4]);
