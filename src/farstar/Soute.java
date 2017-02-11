@@ -87,21 +87,27 @@ public class Soute {
     Vaisseau localiser(Transportable element) {
         for (Map.Entry<String, Transportable> e : elementCharges.entrySet()) {
             if(element.getNom().equals(e.getKey())) {
+                //cas de base 1
                 return parent;
-            }      
-        }
-        return localiserEnProfondeur(element);
-    }
-    
-    private Vaisseau localiserEnProfondeur(Transportable element) {
-        try {
-            //Il faut vérifier si l'élément peut en localiser d'autres
-            element.getClass().getMethod("localiser");
-            Vaisseau vaisseau = (Vaisseau) element;
-            return vaisseau.localiser(element);
-        } catch (NoSuchMethodException | SecurityException excep) {
-            //Rien ne sert de localiser plus en profondeur
+            }
+            
+            Vaisseau resultat = localiserEnProfondeur(e.getValue(), element); 
+            
+            if(resultat != null) {
+                //cas de base 2
+                return resultat;
+            }
         }
         return null;
+    }
+    
+    private Vaisseau localiserEnProfondeur(Transportable vaisseau, Transportable element) {
+        try {
+            //Il faut vérifier si l'élément peut en localiser d'autres
+            return ((Vaisseau) vaisseau).localiser(element);
+        } catch (Exception e) {
+            //Rien ne sert de chercher d'avantage
+            return null;
+        }
     }
 }
