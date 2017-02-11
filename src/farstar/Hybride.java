@@ -1,5 +1,7 @@
 package farstar;
 
+import java.util.Map;
+
 public class Hybride extends VaisseauArmeLourd 
         implements Chargeable {
     
@@ -58,4 +60,28 @@ public class Hybride extends VaisseauArmeLourd
         return soute.decharger(nomElement);
     }
     
+    public int getVolumeRestantSoute() {
+        return soute.getVolumeRestant();
+    }
+    
+    public Vaisseau localiser(Transportable element) {
+        Vaisseau element_trouve = super.localiser(element);
+        if(element_trouve == null) {
+            return soute.localiser(element);
+        } else {
+            return element_trouve;
+        }
+    }
+    
+    @Override
+    public String toString() {
+        String msg = super.toString() + "\nIl reste " + getVolumeRestantSoute() + " "
+                + "de volume disponible dans la soute.\nChargement :\n";
+        for (Map.Entry<String, Transportable> en : soute.elementCharges.entrySet()) {
+            Object key = en.getKey();
+            msg += key + "\n";
+        }
+        
+        return msg += "\n";
+    }
 }

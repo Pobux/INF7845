@@ -69,6 +69,10 @@ public class Farstar {
         FA.localiser(phaser2);
         FA.localiser(phaser3);
         FA.localiser(phaser4);
+        
+        System.out.println(blaster1);
+        FA.remplirBlaster("BL-1");
+        System.out.println(blaster1);
     }
     
 }

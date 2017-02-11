@@ -95,6 +95,17 @@ public class FarStarAPI {
             }
         }
         
+        if(BD.produitDisponible(element)) {
+            System.out.println(element.getNom() + " est disponible dans l'usine.");
+        }
+        
         return null; //aucun résultat n'a été trouvé
+    }
+    
+    public void remplirBlaster(String nomBlaster) {
+        if(BD.produitCree.containsKey(nomBlaster)) {
+            Blaster blaster = (Blaster) BD.produitCree.get(nomBlaster);
+            blaster.remplir();
+        }
     }
  }

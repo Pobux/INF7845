@@ -2,7 +2,7 @@ package farstar;
 
 public class Blaster extends Arme {
     int capaciteGaz;
-    int gazCourant = 0;
+    int gazCourant;
     
     Blaster(String nom, Object[] args) throws nonConstructionException {
         super(nom, TypeProduit.BLASTER);
@@ -28,32 +28,29 @@ public class Blaster extends Arme {
         }
         
         setCapaciteGaz(capaciteGaz);
-        remplir(gazCourant);
+        setGazCourant(gazCourant);
     }
     
     void setCapaciteGaz(int capaciteGaz) {
         this.capaciteGaz = capaciteGaz;
     }
     
-    void remplir(int gaz) {
-        gazCourant = gazCourant + gaz;
-        if(gazCourant > capaciteGaz) {
-            gazCourant = capaciteGaz;
-        }
+    private void setGazCourant(int gazCourant) {
+        this.gazCourant = gazCourant;
     }
     
-    void remplirPlein() {
+    void remplir() {
         gazCourant = capaciteGaz;
     }
     
-    int getTauxRemplir() {
-        return gazCourant / capaciteGaz;
+    double getTauxRemplir() {
+        return ((double) gazCourant / capaciteGaz) * 100;
     }
 
     @Override
     public String toString() {
         String msg = super.toString();
-        msg += "Remplit a " + getTauxRemplir() + ".";
+        msg += "Remplit a " + getTauxRemplir() + "%.";
         return msg + "\n";
     }
 }
